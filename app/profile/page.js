@@ -1,39 +1,45 @@
-'use client'
-import React from 'react'
-import { useState, useEffect } from 'react'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import Profile from '@components/Profile'
+"use client";
 
-const page = () => {
-  const {data : session} = useSession("");
-  const [posts, setPosts] = useState([])
-  const handleEdit = () => {
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
-  }
+import Profile from "@components/Profile";
 
-  const handleDelete = async () => {
+const MyProfile = () => {
+  const router = useRouter();
+  const { data: session } = useSession();
 
-  }
+  const [myPosts, setMyPosts] = useState([]);
 
   useEffect(() => {
-    const fetchPost = async () => {
-        const res = await fetch(`/api/users/${session?.user.id}/posts`);
-        const data = await res.json();
-        setPosts(data);
-    }
-    if(session?.user.id) fetchPost();
-}, [])
-console.log(posts)
-  return (
-    <Profile 
-    name="My"
-    description="Welcome to your personalized profile page"
-    data={posts}
-    handleEdit={handleEdit}
-    handleDelete={handleDelete}
-    />
-  )
-}
+    const fetchPosts = async () => {
+      const response = await fetch(`/api/users/${session?.user.id}/posts`);
+      const data = await response.json();
 
-export default page
+      setMyPosts(data);
+    };
+
+    if (session?.user.id) fetchPosts();
+  }, [session?.user.id]);
+
+  const handleEdit = (post) => {
+    router.push(`/update-prompt?id=${post._id}`);
+  };
+
+  const handleDelete = async (post) => {
+  
+  };
+
+  return (
+    <Profile
+      name='My'
+      desc='Welcome to your personalized profile page. Share your exceptional prompts and inspire others with the power of your imagination'
+      data={myPosts}
+      handleEdit={handleEdit}
+      handleDelete={handleDelete}
+    />
+  );
+};
+
+export default MyProfile;
