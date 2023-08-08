@@ -23,7 +23,7 @@ const Feeds = () => {
     const [searchResult, setSearchResult] = useState([]);
 
     const filterPosts = (text) => {
-        const reg = new RegExp(searchText, 'i')
+        const reg = new RegExp(text, 'i')
         return posts.filter(item => 
                 reg.test(item.creator.username) || 
                 reg.test(item.prompt) ||
@@ -37,6 +37,13 @@ const Feeds = () => {
             const searchPosts = filterPosts(searchText)
             setSearchResult(searchPosts)
         }, 500)
+    }
+
+    const handleTagClick = (tag) => {
+        setSearchText(tag)
+        const searchPosts = filterPosts(tag)
+        console.log(searchPosts)
+        setSearchResult(searchPosts)
     }
     
     useEffect(() => {
@@ -63,7 +70,7 @@ const Feeds = () => {
         </form>
         <PromptCardList
         data ={searchText == "" ? posts : searchResult}
-        handleTagClick = {() => {}}
+        handleTagClick = {handleTagClick}
         />
     </section>
   )
