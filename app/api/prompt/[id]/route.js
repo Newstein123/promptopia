@@ -25,10 +25,9 @@ export async function PATCH(req, {params}) {
     const res = await req.json();
     const prompt = res.prompt;
     const tag = res.tag;
-    console.log(prompt, tag);
     try {
         await connectToDB();
-        const existingPrompt = Prompt.findById(params.id);
+        const existingPrompt = await Prompt.findById(params.id);
         if(!existingPrompt) {
             return new Response("Prompt not found", {status : 404})
         }
@@ -37,7 +36,7 @@ export async function PATCH(req, {params}) {
         existingPrompt.tag = tag;
 
         await existingPrompt.save();
-        return new Response("Prompt Updated Successfully", {status : 200})
+        return new Response(JSON.stringify(existingPrompt), {status : 200})
     } catch(err) {
         // return new Response("Failed to response", {status : 500})
         console.log(err)
