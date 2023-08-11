@@ -1,4 +1,5 @@
-import Feed from '@components/Feeds'
+import Feeds from "@components/Feeds";
+
 
 export default function Home() {
   return (
@@ -8,8 +9,8 @@ export default function Home() {
       <span className='orange_gradient text-center'> AI-Powerd Prompts </span>
       <p className='desc text-center'> Promptopia is a AI works to discover, create and share creative prompts </p>
       
-      {/* Feed  */}
-      <Feed />
+      {/* Feeds */}
+      <Feeds />
     </section>
 
   )
