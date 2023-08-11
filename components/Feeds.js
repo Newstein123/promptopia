@@ -34,8 +34,9 @@ const Feeds = () => {
     const handleSearch = (e) => {
         const post = e.target.value.toLowerCase();
         setSearchText(post);
+        clearTimeout(searchTimeout); // Clear the previous timeou
         setTimeout(() => {
-            const searchPosts = filterPosts(searchText)
+            const searchPosts = filterPosts(post)
             setSearchResult(searchPosts)
         }, 500)
     }
