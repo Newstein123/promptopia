@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Feed from '@components/Feeds'
 
 export default function Home() {
@@ -10,7 +9,7 @@ export default function Home() {
       <p className='desc text-center'> Promptopia is a AI works to discover, create and share creative prompts </p>
       
       {/* Feed  */}
-      <Feed />
+      {/* <Feed /> */}
     </section>
 
   )
