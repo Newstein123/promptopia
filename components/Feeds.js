@@ -34,7 +34,6 @@ const Feeds = () => {
     const handleSearch = (e) => {
         const post = e.target.value.toLowerCase();
         setSearchText(post);
-        clearTimeout(searchTimeout); // Clear the previous timeou
         setTimeout(() => {
             const searchPosts = filterPosts(post)
             setSearchResult(searchPosts)
@@ -70,10 +69,10 @@ const Feeds = () => {
             className='search_input peer'
             />
         </form>
-        <PromptCardList
+        {/* <PromptCardList
         data ={searchText == "" ? posts : searchResult}
         handleTagClick = {handleTagClick}
-        />
+        /> */}
     </section>
   )
 }
